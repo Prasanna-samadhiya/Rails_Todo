@@ -1,0 +1,42 @@
+
+<% if user_signed_in? %>
+  <h1><%= current_user.email.split("@")[0] %> 's workspace</h1>
+<% else %>
+  <h1>ToDos</h1>
+<% end %>
+
+
+<% if user_signed_in? %>
+   <div>
+  <%= form_with(model: Todo.new, html:{id:"form"},url: todos_path, local: true) do |form| %>
+    Title:<%= form.text_field :title, placeholder: "Title" %>
+    Description:<%= form.text_field :description, placeholder: "Description" %>
+    Is Completed:<%= form.check_box :done %> Done
+    <%= form.submit "Add ToDo" %>
+  <% end %>
+
+  <% if current_user.todo.length == 0 %>
+    <ul>
+      Create todos to keep track of your tasks
+    </ul>
+  <% else %>
+    <ul>
+    <% current_user.todo.each do |todo| %>
+      <li>
+        <%= todo.title %> - <%= todo.description %> - <%= todo.done ? "✅" : "❌" %>
+        <%= link_to "Edit", edit_todo_path(todo), class: "btn" %>
+        <%= button_to "Delete", todo_path(todo), method: :delete, data: { confirm: "Are you sure?" } %>
+      </li>
+    <% end %>
+  </ul>
+  <% end %>
+  
+
+  <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
+</div>
+<% else %>
+ <div>
+   <h2>Join Us</h2>
+   <%= button_to 'Sign in', new_user_session_path %>
+ </div>
+<% end %>
