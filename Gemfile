@@ -8,6 +8,8 @@ gem "propshaft"
 gem "pg"
 # Use devise for the user model and authentication
 gem "devise"
+# tailwind for better styling
+gem "tailwindcss-rails"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]

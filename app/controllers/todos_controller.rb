@@ -8,7 +8,7 @@ class TodosController < ApplicationController
   end
 
   def create
-    @todo = current_user.todo.build(todo_params)
+    @todo = Todo.new(todo_params)
     if @todo.save
       redirect_to todos_path, notice: "Todo Crested"
     else
@@ -36,7 +36,7 @@ class TodosController < ApplicationController
   private
 
   def todo_params
-    params.require(:todo).permit(:title, :done, :description)
+    params.require(:todo).permit(:title, :done, :description, :user_id)
   end
 
   def set_todo

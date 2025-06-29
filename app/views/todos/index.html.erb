@@ -9,6 +9,7 @@
 <% if user_signed_in? %>
    <div>
   <%= form_with(model: Todo.new, html:{id:"form"},url: todos_path, local: true) do |form| %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
     Title:<%= form.text_field :title, placeholder: "Title" %>
     Description:<%= form.text_field :description, placeholder: "Description" %>
     Is Completed:<%= form.check_box :done %> Done

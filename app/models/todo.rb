@@ -1,5 +1,6 @@
 class Todo < ApplicationRecord
   belongs_to :user
+  validates :title, presence: true
 
   before_validation :strip_title
   before_save :set_default_description
